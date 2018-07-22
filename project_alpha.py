@@ -19,13 +19,13 @@ org=[]
 time=[]
 loc=[]
 skillset=[]
-stand=soup.find("div",attrs={'class':'desc'})
+
 for container in containers:
     designation.append(container.li['title'])
     org.append(container.find("span",{"class":"org"}).text)
     time.append(container.find("span",{"class":"exp"}).text)
     loc.append(container.find("span",{"class":"loc"}).text)
-    skillset.append(stand.select('span[skill]'))
+    skillset.append(container.find("span"),{"class":"skill"}).text)
 
 
 
@@ -38,3 +38,7 @@ table=pd.DataFrame({'post':designation,
 
 print("\n")
 print(table.tail(2))
+writer=pd.ExcelWriter('output.xlsx')
+table.to_excel(writer,'sheet1')
+writer.save()
+
