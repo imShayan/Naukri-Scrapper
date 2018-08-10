@@ -47,6 +47,37 @@ table=pd.DataFrame({'Designation':designation,
     
 
 print("\n")
+jobstr=""
+#store list of all skills of all employ in a single string for regex parsing 
+for skill in skillset:
+    jobstr=jobstr + skill
+print(jobstr)
+#create an empty dictionary to store the frequency of occurence of each skills 
+dk={}
+#applying regex for fast and effiecient search  
+sk1= re.compile(r'Management|management')
+dk['s1']=len(sk1.findall(jobstr)
+
+sk2=re.compile(r'Java|java')
+dk['s2']=len(sk2.findall(jobstr))
+
+sk3=re.compile(r'Python|python')
+dk['s3']=len(sk3.findall(jobstr))
+
+sk4=re.compile(r'PHP|php')
+dk['s4']=len(sk4.findall(jobstr))
+             
+sk5=re.compile(r'marketing')
+dk['s5']=len(sk5.findall(jobstr))
+#make table to store the dictionary              
+table2=pd.DataFrame(dk,index=[0])
+print(table2)
+#visualize the data using bar graph
+ax=table2.plot(kind='bar' ,title='job analysis on skills',figsize=(15,10),legend=True,fontsize=10)
+ax.set_xlabel('skills',fontsize=12)
+ax.set_ylabel('jobs available',fontsize=12)
+plt.show()
+
 #writing dataframe to excel file 
 writer=pd.ExcelWriter('Banglore Job_Scrapper.xlsx')
 table.to_excel(writer,"sheet1")
